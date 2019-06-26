@@ -10,6 +10,21 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+              modules: true,
+              localIdentName: '[name]_[local]-[hash:base64:5]',
+            }
+          },
+          "sass-loader",
+        ]
+      },
+      {
         test: /\.(js|jsx)$/,
         use: [
           {
