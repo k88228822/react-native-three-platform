@@ -13,4 +13,8 @@
     <body>
         <div id="root"></div>
     </body>
+    <script>
+      window.fontSize = Math.min(640, document.body.clientWidth) / (18.75);
+      document.getElementsByTagName("html")[0].style.fontSize = ( window.fontSize) + "px";
+    </script>
 </html>

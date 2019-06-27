@@ -1,5 +1,20 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const pxToRem = require('postcss-pxtorem')
+const autoPreFixer = require('autoprefixer')
+
+const postCssOptions = {
+  ident: 'postcss',
+  plugins: () => [
+    autoPreFixer,
+    pxToRem({
+      rootValue: 16, // 设计图根fontSize大小
+      propWhiteList: []
+    }),
+  ],
+  sourceMap: true,
+
+}
 
 module.exports = {
   entry: {app: './index.web.js'},
@@ -7,6 +22,7 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -20,6 +36,10 @@ module.exports = {
               modules: true,
               localIdentName: '[name]_[local]-[hash:base64:5]',
             }
+          },
+          {
+            loader: 'postcss-loader',
+            options: postCssOptions
           },
           "sass-loader",
         ]
